@@ -1,13 +1,6 @@
 function computerPlay() {
-    let random = Math.random();
-    let result;
-    if (random < 1/3 ) {
-        return result = "Rock"
-    } else if (random < 2/3) {
-        return result = "Paper"
-    } else {
-        return result = "Scissors"
-    }
+    const array = ["Rock", "Paper", "Scissors"];
+    return array[Math.floor(Math.random()*array.length)]
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -72,8 +65,6 @@ function game() {
 } 
 
 function capitalize (word) {
-    let initialUppCase = word.toUpperCase().slice(0,1)
-    let lowCaseRest = word.toLowerCase().slice(1,);
-    return initialUppCase + lowCaseRest
+    return word.charAt(0).toUpperCase() + word.slice(1,).toLowerCase();
 }
 
