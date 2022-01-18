@@ -5,24 +5,24 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
-        return "Tie! Play again.";
+        return "Tie! Better luck next time.";
     } else if (playerSelection.toLowerCase() == "rock") {
         if (computerSelection == "Paper") {
             return "You lose! Paper beats Rock."
         } else {
-            return "You win! Rock beats Scissors"
+            return "You win! Rock beats Scissors."
         }
     } else if (playerSelection.toLowerCase() == "paper") {
         if (computerSelection == "Rock") {
             return "You win! Paper beats Rock."
         } else {
-            return "You lose! Scissors beats Paper"
+            return "You lose! Scissors beats Paper."
         }
     } else if (playerSelection.toLowerCase() == "scissors"){
         if (computerSelection == "Rock") {
             return "You lose! Rock beats Scissors."
         } else {
-            return "You win! Scissors beats Paper"
+            return "You win! Scissors beats Paper."
         }
     } else {
         return "That's not a valid option. Choose again!"
