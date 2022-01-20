@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listeners</title>
+    <script src="javascript.js" defer></script>
+</head>
+<body>
+    <h1>Here we will learn how to change the DOM based on events</h1>
+    <p>There are 3 ways of doing so:</p>
+    <ol>
+        <li>Attach functions’ attributes directly on your HTML elements</li>
+        <li>Set the “on_event_” property on the DOM object in your JavaScript</li>
+        <li>Attach event listeners to the nodes in your JavaScript</li>
+    </ol>
+    <br> <!-- method 1 -->
+    <button onclick="alert('Hello World')">Click Me</button> 
+    <!-- method 2 -->
+    <button id="btn">Click Me</button>
+    <!-- method 3 -->
+    <button id="btn2">Click Me Too</button>
+    <!-- using named functions -->
+    <div style="margin-top: 5px;">
+        <!-- method 1 -->
+        <button onclick="alertFunction()">CLICK ME BABY 1</button>  
+        <!-- methods 2 and 3 -->
+        <button id="btn3">CLICL ME BABY 2</button>
+    </div>
+</body>
+</html>
