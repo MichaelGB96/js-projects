@@ -19,3 +19,9 @@ btn3.onclick = alertFunction;
 */
 // method 3
 btn3.addEventListener('click', alertFunction);
+
+// Passing parameters
+
+btn.addEventListener('click', function (e) {
+    e.target.style.background = 'blue';
+});
