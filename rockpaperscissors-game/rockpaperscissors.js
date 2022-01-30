@@ -12,27 +12,28 @@ paperBtn.addEventListener('click', playRound)
 scissBtn.addEventListener('click', playRound)
 
 let outcome = document.querySelector('.outcome');
-let selections = document.createElement('p');
+let selections = document.createElement('div');
+let playerSelOut = document.createElement('p');
+let computerSelOut = document.createElement('p');
 let result = document.createElement('p');
-let scoreText = document.createElement('p');
+let scoreText = document.createElement('div');
+let scorePlayer = document.createElement('p');
+let scoreComputer = document.createElement('p');
 let winner = document.createElement('p');
+winner.className = 'winnerText';
 let pScore = 0;
 let cScore = 0;
+
+const Emojis = {
+    rock: '&#x270A',
+    paper: '&#x270B',
+    scissors: '&#x270C'
+}
 
 function playRound(e) {  
     const playerSelection = e.target.id;  
     const computerSelection = computerPlay();
-
-    if(outcome.firstElementChild) {
-        selections.remove;
-        result.remove;
-        scoreText.remove;
-    }    
     
-    selections.textContent = `You chose ${playerSelection}. Computer chose ${computerSelection}.`;   
-    outcome.appendChild(selections)
-    outcome.appendChild(result)   
-
     if (playerSelection === computerSelection) {
         result.textContent = "Tie! Better luck next time.";
     } else if (playerSelection == "rock") {
@@ -62,9 +63,27 @@ function playRound(e) {
     } else {
         result.textContent = "That's not a valid option. Choose again!"
     }
+    
+    if(outcome.firstElementChild) {
+        selections.remove;
+        result.remove;
+        scoreText.remove;
+    } 
 
-    scoreText.textContent = `Your score: ${pScore}. Computer score ${cScore}.`;
+    scorePlayer.textContent = `Player score: ${pScore}.`;
+    scoreComputer.textContent = `Computer score: ${cScore}.`;
+    scoreText.appendChild(scorePlayer);
+    scoreText.appendChild(scoreComputer); 
+    scoreText.className = 'left-right';
     outcome.appendChild(scoreText);
+    
+    playerSelOut.innerHTML = `<p>Last selection \n\r ${Emojis[playerSelection]}</p>`;
+    computerSelOut.innerHTML = `<p>Last selection  \n\r ${Emojis[computerSelection]}</p>`;  
+    selections.appendChild(playerSelOut);
+    selections.appendChild(computerSelOut);
+    selections.classList = 'selections left-right';
+    outcome.appendChild(selections)
+    outcome.appendChild(result) 
 
     if (pScore === 5 || cScore === 5) {
         hideBtns()
@@ -91,6 +110,7 @@ function hideBtns() {
 function tryAgain() {
     let tryAgainBtn = document.createElement('button');
     tryAgainBtn.textContent = 'Try again';
+    tryAgainBtn.className = 'btn';
     outcome.appendChild(tryAgainBtn);
     tryAgainBtn.addEventListener('click', resetGame);
 }
