@@ -12,17 +12,20 @@ paperBtn.addEventListener('click', playRound)
 scissBtn.addEventListener('click', playRound)
 
 let outcome = document.querySelector('.outcome');
-let selections = document.createElement('div');
-let playerSelOut = document.createElement('p');
-let computerSelOut = document.createElement('p');
+let pBoard = document.createElement('div');
+let cBoard = document.createElement('div');
+let pBoardLabel= document.createElement('p');
+let cBoardLabel = document.createElement('p');
+let pScoreText = document.createElement('p');
+let cScoreText = document.createElement('p');
+let pSelection = document.createElement('p');
+let cSelection = document.createElement('p');
 let result = document.createElement('p');
-let scoreText = document.createElement('div');
-let scorePlayer = document.createElement('p');
-let scoreComputer = document.createElement('p');
 let winner = document.createElement('p');
 winner.className = 'winnerText';
 let pScore = 0;
 let cScore = 0;
+let count = 0;
 
 const Emojis = {
     rock: '&#x270A',
@@ -38,66 +41,81 @@ function playRound(e) {
         result.textContent = "Tie! Better luck next time.";
     } else if (playerSelection == "rock") {
         if (computerSelection == "paper") {
-            result.textContent = "You lose! Paper beats Rock.";
+            result.textContent = "Paper beats Rock.";
             cScore += 1;
         } else {
-            result.textContent = "You win! Rock beats Scissors.";
+            result.textContent = "Rock beats Scissors.";
             pScore += 1;
         }
     } else if (playerSelection == "paper") {
         if (computerSelection == "rock") {
-            result.textContent = "You win! Paper beats Rock.";
+            result.textContent = "Paper beats Rock.";
             pScore += 1;
         } else {
-            result.textContent = "You lose! Scissors beats Paper.";
+            result.textContent = "Scissors beats Paper.";
             cScore += 1;
         }
     } else if (playerSelection == "scissors"){
         if (computerSelection == "rock") {
-            result.textContent = "You lose! Rock beats Scissors.";
+            result.textContent = "Rock beats Scissors.";
             cScore += 1;
         } else {
-            result.textContent = "You win! Scissors beats Paper.";
+            result.textContent = "Scissors beats Paper.";
             pScore += 1;
         }
-    } else {
-        result.textContent = "That's not a valid option. Choose again!"
     }
     
     if(outcome.firstElementChild) {
-        selections.remove;
+        pBoard.remove;
+        cBoard.remove;
         result.remove;
-        scoreText.remove;
     } 
 
-    scorePlayer.textContent = `Player score: ${pScore}.`;
-    scoreComputer.textContent = `Computer score: ${cScore}.`;
-    scoreText.appendChild(scorePlayer);
-    scoreText.appendChild(scoreComputer); 
-    scoreText.className = 'left-right';
-    outcome.appendChild(scoreText);
-    
-    playerSelOut.innerHTML = `<p>Last selection \n\r ${Emojis[playerSelection]}</p>`;
-    computerSelOut.innerHTML = `<p>Last selection  \n\r ${Emojis[computerSelection]}</p>`;  
-    selections.appendChild(playerSelOut);
-    selections.appendChild(computerSelOut);
-    selections.classList = 'selections left-right';
-    outcome.appendChild(selections)
+    let boards = document.createElement('div');
+    outcome.appendChild(boards);
+    boards.className = 'boards';
+
+    boards.appendChild(pBoard);
+    pBoard.className = 'board';
+    pBoard.appendChild(pBoardLabel);
+    pBoardLabel.textContent = 'PLAYER';
+    pBoard.appendChild(pScoreText);
+    pScoreText.textContent = pScore;
+    pScoreText.className = 'score';
+    pBoard.appendChild(pSelection);
+    pSelection.innerHTML = `<p>Last selection ${Emojis[playerSelection]}</p>`;
+    pSelection.className = 'selection';
+
+    boards.appendChild(cBoard);
+    cBoard.className = 'board';
+    cBoard.appendChild(cBoardLabel);
+    cBoardLabel.textContent = 'COMPUTER';
+    cBoard.appendChild(cScoreText);
+    cScoreText.textContent = cScore;
+    cScoreText.className = 'score';
+    cBoard.appendChild(cSelection);
+    cSelection.innerHTML = `<p>Last selection ${Emojis[computerSelection]}</p>`;
+    cSelection.className = 'selection';
+
     outcome.appendChild(result) 
+        
 
     if (pScore === 5 || cScore === 5) {
         hideBtns()
         sayWinner()
         tryAgain()
     };
+
+    count += 1;
+    if (count) document.querySelector('.header p').textContent = 'First one to reach 5 points win.';
 }
 
 function sayWinner() {
     outcome.appendChild(winner)
     if (pScore > cScore) {
-        winner.textContent = 'You win the war';
+        winner.textContent = 'YOU WIN!';
     } else {
-        winner.textContent = 'Computer wins the war';
+        winner.textContent = 'YOU LOSE!';
     }   
 }
 
@@ -122,6 +140,8 @@ function resetGame() {
     }
     pScore = 0;
     cScore = 0;
+    count = 0;
+    document.querySelector('.header p').textContent = 'Chose one option to start playing!';
     rockBtn.style.display = 'inline';
     paperBtn.style.display = 'inline';
     scissBtn.style.display = 'inline';
